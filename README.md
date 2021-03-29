@@ -1,3 +1,17 @@
+# Rick & Morty Directory
+
+4 find TODO's search entire codebase: `TODO: @cagataycali`
+
+# Changelog
+
+```
+**commit 3abe77f20331ffdd7113f7d2efa818b99bb5984c**
+Author: cagataycali <cagataycali@icloud.com>
+Date:   Tue Mar 30 02:19:40 2021 +0300
+🎉  Init codebase
+```
+![initial version of ui](./metadata/initial.png)
+
 # Micro Frontend Fun (Not blazing fast)
 
 This project is a template for your next micro-frontend project.
