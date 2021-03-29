@@ -1,4 +1,4 @@
-import styles from "../styles/Home.module.css";
+import styles from "../styles/Home.module.css"; // TODO: @cagataycali remove unused css
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Tabs, Tab, Col } from "react-bootstrap";
 // We need to use top level await on these modules as they are async.
@@ -7,6 +7,8 @@ const TabContent = (await import("Tab/Tab")).default;
 const CardComponent = (await import("Card/Card")).default;
 
 
+// TODO: @cagataycali maybe I need to move getEpisodes logic inside the TabContent.
+// or write a BFF for episodes & locations
 const getEpisodes = (page = 1) =>
   fetch(`https://rickandmortyapi.com/api/episode?page=${page}`).then((res) =>
     res.json()
@@ -15,7 +17,7 @@ const getEpisodes = (page = 1) =>
 export async function getStaticProps(context) {
   const episodes = await getEpisodes();
   return {
-    props: { episodes }, // will be passed to the page component as props
+    props: { episodes },
   };
 }
 
@@ -34,6 +36,7 @@ export default function Home(props) {
   };
 
   const renderCharacters = (episode) => {
+    // TODO: @cagataycali just do not slice write load more feature here.
     return episode.characters.slice(0, 8).map((character) => {
       return (
         <Col md="auto" key={`${episode.id}-${character}`}>
@@ -53,6 +56,11 @@ export default function Home(props) {
       >
         <Tab eventKey="episodes" title="By Episodes">
           {episodes.results.slice(0, 2).map((episode) => (
+            /* TODO: @cagataycali 
+              Create a abstraction here. 
+              TabContent have to handle loadMore logic internally.
+              and have to render characters inside, (tab mfe have to access card)
+            */
             <TabContent
               episode={episode}
               characters={() => renderCharacters(episode)}
@@ -63,16 +71,15 @@ export default function Home(props) {
             />
           ))}
         </Tab>
+        {/* Just 4 tabs work as expected. I'll be remove the code below after abstract TabContent */}
         <Tab eventKey="locations" title="By Locations">
           <Row>
             <Col>
               <CardComponent character={characterPlaceholder} />
             </Col>
-            
             <Col>
               <CardComponent character={characterPlaceholder} />
             </Col>
-            
           </Row>
         </Tab>
       </Tabs>
