@@ -12,6 +12,18 @@ Date:   Tue Mar 30 02:19:40 2021 +0300
 ```
 ![initial version of ui](./metadata/initial.png)
 
+
+# Start Locally
+
+```bash
+./start.sh card # in first terminal
+./start.sh tab # in second terminal
+
+cd composer
+yarn dev
+```
+
+
 # Micro Frontend Fun (Not blazing fast)
 
 This project is a template for your next micro-frontend project.
