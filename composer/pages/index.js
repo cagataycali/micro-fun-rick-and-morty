@@ -1,50 +1,44 @@
-import styles from "../styles/Home.module.css"; // TODO: @cagataycali remove unused css
+
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useState } from "react";
 import { Container, Row, Tabs, Tab, Col } from "react-bootstrap";
-// We need to use top level await on these modules as they are async.
-// This is actually what let's module federation work with NextJS
-const TabContent = (await import("Tab/Tab")).default;
-const CardComponent = (await import("Card/Card")).default;
 
+const Episode = (await import("Episode/Episode")).default;
+const Location = (await import("Location/Location")).default;
 
-// TODO: @cagataycali maybe I need to move getEpisodes logic inside the TabContent.
-// or write a BFF for episodes & locations
-const getEpisodes = (page = 1) =>
+const getEpisodes = (page = 0) =>
   fetch(`https://rickandmortyapi.com/api/episode?page=${page}`).then((res) =>
+    res.json()
+  );
+
+const getLocations = (page = 0) =>
+  fetch(`https://rickandmortyapi.com/api/location?page=${page}`).then((res) =>
     res.json()
   );
 
 export async function getStaticProps(context) {
   const episodes = await getEpisodes();
+  const locations = await getLocations();
+
+  const _episodes = episodes.results.slice(0, 2);
+  // _episodes.map((episode) => {
+  //   episode.characters = episode.characters.slice(0, 2);
+  // });
+
+  const _locations = locations.results.slice(0, 2);
+  // _locations.map((location) => {
+  //   location.residents = locations.residents.slice(0, 2);
+  // });
+
   return {
-    props: { episodes },
+    props: { episodes, locations, _episodes, _locations },
   };
 }
 
 export default function Home(props) {
-  const { episodes } = props;
-
-  const characterPlaceholder = {
-    name: "Cagatay",
-    origin: {
-      name: "Cagatay Cali",
-    },
-    image: "https://rickandmortyapi.com/api/character/avatar/38.jpeg",
-    gender: "Male",
-    race: "White",
-    status: "Married",
-  };
-
-  const renderCharacters = (episode) => {
-    // TODO: @cagataycali just do not slice write load more feature here.
-    return episode.characters.slice(0, 8).map((character) => {
-      return (
-        <Col md="auto" key={`${episode.id}-${character}`}>
-          <CardComponent apiURL={character} character={characterPlaceholder} />
-        </Col>
-      );
-    });
-  };
+  // const { episodes, locations } = props;
+  const [episodes, setEpisodes] = useState(props._episodes);
+  const [locations, setLocations] = useState(props._locations);
 
   return (
     <Container>
@@ -55,32 +49,14 @@ export default function Home(props) {
         id="noanim-tab-example"
       >
         <Tab eventKey="episodes" title="By Episodes">
-          {episodes.results.slice(0, 2).map((episode) => (
-            /* TODO: @cagataycali 
-              Create a abstraction here. 
-              TabContent have to handle loadMore logic internally.
-              and have to render characters inside, (tab mfe have to access card)
-            */
-            <TabContent
-              episode={episode}
-              characters={() => renderCharacters(episode)}
-              loadMore={() => {
-                console.log("load more");
-                // TODO: @cagataycali load more have to be binded right here.
-              }}
-            />
+          {episodes.map((episode) => (
+            <Episode episode={episode} />
           ))}
         </Tab>
-        {/* Just 4 tabs work as expected. I'll be remove the code below after abstract TabContent */}
         <Tab eventKey="locations" title="By Locations">
-          <Row>
-            <Col>
-              <CardComponent character={characterPlaceholder} />
-            </Col>
-            <Col>
-              <CardComponent character={characterPlaceholder} />
-            </Col>
-          </Row>
+          {locations.map((location) => (
+            <Location location={location} />
+          ))}
         </Tab>
       </Tabs>
     </Container>
