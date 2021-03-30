@@ -32,21 +32,8 @@ Date:   Tue Mar 30 02:19:40 2021 +0300
 # Start Locally
 
 ```bash
-# Install
-./install.sh episode # in first terminal
-./install.sh location # in second terminal
-
-# Start
-./start.sh episode # in first terminal
-./start.sh location # in second terminal
-
-# Start composer
-cd composer
-yarn dev
-
-open http://localhost:8000
+./bootstrap.sh # this code will open http://localhost:8000 which is composer after compile.
 ```
-
 
 # Micro Frontend Fun (Not blazing fast)
 
