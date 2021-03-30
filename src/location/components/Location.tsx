@@ -15,12 +15,12 @@ type Location = {
 const Location = (props: {location: Location}) => {
   
   const {location} = props
-  const [residents, setResidents] = useState(location.residents.slice(0, 2))
+  const [residents, setResidents] = useState(location.residents.slice(0, 6))
   const [page, setPage] = useState(1)
 
   const loadMore = () => {
     const _page = page + 1
-    setResidents(location.residents.slice(0, _page * 2))
+    setResidents(location.residents.slice(0, _page * 6))
     setPage(_page)
   }
 

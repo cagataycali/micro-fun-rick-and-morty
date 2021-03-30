@@ -2,6 +2,22 @@
 
 4 find TODO's search entire codebase: `TODO: @cagataycali`
 
+
+# Roadmap
+
+- [ ] Write tests for character component fetch (jest.spyFetch)
+- [ ] Write tests for Episode/Location renderLoadMoreButton
+- [ ] Add infinitive scroll instead of button.
+- [ ] Write tests for infinitive scroll
+- [ ] Write tests for loadMore
+- [ ] Prepare a pm2 starter for just POC purposes or just bash script to setup locally.
+- [ ] Dockerize each project (staged dockerfiles for cache usage)
+- [ ] Heroku || vercel deploy's
+- [ ] Create .gitlab-ci.yml for each project (only changes deploys)
+- [ ] Create .github/workflows/composer.yml for composer
+- [ ] Create .github/workflows/fragment.yml for fragments
+- [ ] Create deployment.yml with HPA and service.yml for k8s. (NodePort for each)
+
 # Changelog
 
 ```
@@ -16,11 +32,19 @@ Date:   Tue Mar 30 02:19:40 2021 +0300
 # Start Locally
 
 ```bash
-./start.sh card # in first terminal
-./start.sh tab # in second terminal
+# Install
+./install.sh episode # in first terminal
+./install.sh location # in second terminal
 
+# Start
+./start.sh episode # in first terminal
+./start.sh location # in second terminal
+
+# Start composer
 cd composer
 yarn dev
+
+open http://localhost:8000
 ```
 
 
