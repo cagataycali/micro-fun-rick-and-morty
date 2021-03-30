@@ -1,5 +1,6 @@
+import fetchMock from "jest-fetch-mock";
 import { render, screen } from "@testing-library/react";
-import Card from "../components/Card";
+import Card from "../components/Character";
 
 const character = {
   name: "Beth Smith",
@@ -13,6 +14,9 @@ const character = {
 };
 
 describe("Card", () => {
+  // beforeEach(() => {
+  //   fetchMock.resetMocks();
+  // });
   it("renders title correctly", () => {
     render(<Card character={character} />);
     const element = screen.getByTestId("card-title");
@@ -35,4 +39,15 @@ describe("Card", () => {
     const element = screen.getByTestId("card-image");
     expect(element.src).toContain(character.image);
   });
+  // it("renders from apiURL", () => {
+  //   fetchMock.mockResponseOnce(JSON.stringify({ character }));
+  //   render(
+  //     <Card
+  //       character={character}
+  //       apiURL="https://rickandmortyapi.com/api/character/38"
+  //     />
+  //   );
+  //   const element = screen.getByTestId("card-image");
+  //   expect(element.src).toContain(character.image);
+  // });
 });

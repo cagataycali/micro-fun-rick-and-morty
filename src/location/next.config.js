@@ -8,10 +8,10 @@ module.exports = {
   webpack: (config, options) => {
     const { buildId, dev, isServer, defaultLoaders, webpack } = options;
     const mfConf = {
-      name: "Card",
+      name: "Location",
       library: {
         type: config.output.libraryTarget,
-        name: "Card",
+        name: "Location",
       },
       filename: "static/runtime/remoteEntry.js",
       // This is where we configure the remotes we want to consume.
@@ -19,8 +19,7 @@ module.exports = {
       remotes: {},
       // as the name suggests, this is what we are going to expose
       exposes: {
-        "./Card": "./components/Card",
-        "./getCharacter": "./utils/getCharacter",
+        "./Location": "./components/Location"
       },
       // over here we can put a list of modules we would like to share
       shared: [],

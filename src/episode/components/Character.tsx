@@ -13,31 +13,33 @@ export type Character = {
   status: string;
 }
 
-const CardComponent = (props: {character: Character, apiURL?: string}) => {
+const CharacterComponent = (props: {character?: Character, apiURL?: string}) => {
   const [character, setCharacter] = useState(props.character)
-  const [loaded, setLoaded] = useState(false)
+  const [loaded, setLoaded] = useState(false) // loading flag
   // TODO: @cagataycali jest.spy fetch then test the code below.
-   useEffect(() => {
+  // componentDidMount
+  useEffect(() => {
+    /* istanbul ignore next */
     if (!props.apiURL) {
       setLoaded(true)
       return
     }
-
+    /* istanbul ignore next */
     getCharacter(props.apiURL)
       .then(character => {
         setCharacter(character)
         setLoaded(true)
-      })
-      .catch(err => {
-        console.log(err)
-        // TODO: @cagataycali err handling
-      })
+    })
+    .catch(err => {
+      console.log(err)
+      // TODO: @cagataycali err handling
+    })
   }, [])
 
   if (!loaded) {
     return null
   }
-   
+
   return (
     <Card style={{ width: "18rem" }}>
       <Card.Img data-testid="card-image" variant="top" src={character.image} />
@@ -54,4 +56,4 @@ const CardComponent = (props: {character: Character, apiURL?: string}) => {
   );
 };
 
-export default CardComponent;
+export default CharacterComponent;

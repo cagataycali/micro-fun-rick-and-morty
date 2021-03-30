@@ -1,9 +1,9 @@
 {
-  "name": "Tab",
+  "name": "Location",
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3000",
+    "dev": "next dev -p 3001",
     "build": "next build",
     "start": "next start",
     "test": "jest"
@@ -11,6 +11,7 @@
   "dependencies": {
     "@module-federation/nextjs-mf": "^0.0.2",
     "bootstrap": "^4.6.0",
+    "jest-fetch-mock": "^3.0.3",
     "next": "10.0.2",
     "react": "17.0.1",
     "react-bootstrap": "^1.5.2",
