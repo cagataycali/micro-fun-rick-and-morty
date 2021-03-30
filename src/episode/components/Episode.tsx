@@ -11,12 +11,13 @@ type Episode = {
 
 const Episode = (props: {episode: Episode}) => {
   const {episode} = props
-  const [characters, setCharacters] = useState(episode.characters.slice(0, 2))
+  const [characters, setCharacters] = useState(episode.characters.slice(0, 6))
   const [page, setPage] = useState(1)
 
   const loadMore = () => {
+    // TODO: @cagataycali test loadMore in episode
     const _page = page + 1
-    setCharacters(episode.characters.slice(0, _page * 2))
+    setCharacters(episode.characters.slice(0, _page * 6))
     setPage(_page)
   }
 
