@@ -27,9 +27,9 @@ describe("Tab", () => {
       `This is a ${location.type} located in ${location.dimension}. There are total of ${location.residents.length} known residents that are originated from here.`
     );
   });
-  it("renders load more button correctly", () => {
-    render(<Tab location={location} />);
-    const element = screen.getByTestId("tab-load-more");
-    expect(element.textContent).toBe("Load more");
-  });
+  // it("renders load more button correctly", () => {
+  //   render(<Tab location={location} />);
+  //   const element = screen.getByTestId("tab-load-more");
+  //   expect(element.textContent).toBe("Load more");
+  // });
 });

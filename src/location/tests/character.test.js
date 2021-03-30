@@ -14,9 +14,9 @@ const character = {
 };
 
 describe("Card", () => {
-  // beforeEach(() => {
-  //   fetchMock.resetMocks();
-  // });
+  beforeEach(() => {
+    fetchMock.resetMocks();
+  });
   it("renders title correctly", () => {
     render(<Card character={character} />);
     const element = screen.getByTestId("card-title");

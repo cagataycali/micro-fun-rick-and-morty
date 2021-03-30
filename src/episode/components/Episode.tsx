@@ -14,13 +14,14 @@ const Episode = (props: {episode: Episode}) => {
   const [characters, setCharacters] = useState(episode.characters.slice(0, 6))
   const [page, setPage] = useState(1)
 
+  // TODO: @cagataycali test loadMore in episode
   const loadMore = () => {
-    // TODO: @cagataycali test loadMore in episode
     const _page = page + 1
     setCharacters(episode.characters.slice(0, _page * 6))
     setPage(_page)
   }
 
+  // TODO: @cagataycali test loadMore in episode
   const renderLoadMoreButton = () => {
     if (characters.length === episode.characters.length) {
       return null
@@ -40,9 +41,10 @@ const Episode = (props: {episode: Episode}) => {
             There are total of {episode.characters.length} featured characters in this episode.
           </Card.Text>
           <Row>{characters.map(character => {
-            return (<Col md="auto" key={`${episode.id}-${character}`}><Character
-              apiURL={character}
-            /></Col>)
+            return (
+            <Col md="auto" key={`${episode.id}-${character}`}>
+              <Character apiURL={character}/>
+            </Col>)
           })}</Row>
           {renderLoadMoreButton()}
         </Card.Body>

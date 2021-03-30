@@ -6,7 +6,7 @@ describe('testing api', () => {
     fetchMock.resetMocks()
   })
  
-  it('calls google and returns data to me', () => {
+  it('calls api and returns data to me', () => {
     fetchMock.mockResponseOnce(JSON.stringify({ data: '12345' }))
     const apiURL = 'https://rickandmortyapi.com/api/character/38'
     //assert on the response
